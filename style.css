@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+
+:root{
+    --strong-cyan: hsl(172, 67%, 45%);
+    --very-dark-cyan:   hsl(183, 100%, 15%);
+    --Dark-grayish-cyan: hsl(186, 14%, 43%);
+    --Grayish-cyan: hsl(184, 14%, 56%);
+    --Light-grayish-cyan: hsl(185, 41%, 84%);
+    --Very-light-grayish-cyan: hsl(189, 41%, 97%);
+    --White: hsl(0, 0%, 100%);
+    --space-mono: 'Space Mono', monospace;
+}
+
+html{
+    font-size: 100%;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+    box-sizing: border-box;
+    
+}
+
+body{
+    font-family: var(--space-mono);
+    font-size: 1.5rem;
+    letter-spacing: 1.2px;
+}
+
+button, input{
+    font-family: var(--space-mono);
+}
+
+button{
+    border: none;
+    width: 100%;
+    border-radius: 0.625rem;
+    padding: 0.75rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn-percent-opt:not(:last-child):hover{
+    background-color: var(--strong-cyan);
+}
+
+.btn-percent.active{
+    background-color: var(--strong-cyan);
+}
+
+.attribution{
+    position: fixed;
+    bottom: 0.9375rem;
+    width: 100%;
+    padding: 0 0.9375rem;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.root-main{
+    height: calc(100vh - 1px);
+    background-color: var(--Light-grayish-cyan);
+    display: grid;
+    place-content: center;
+}
+
+.tip__wrapper{
+    width: 1000px;
+    background-color: var(--White);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 45px;
+    padding: 40px 40px;
+    border-radius: 1.5625rem;
+}
+
+.bill__wrapper{
+    display: grid;
+    row-gap: 35px;
+}
+
+.input-group{
+    display: grid;
+}
+
+input{
+    text-align: end;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background-color: var(--Very-light-grayish-cyan);
+    position: relative;
+    font-size: 20px;
+}
+input:focus{
+    outline: 2px solid var(--strong-cyan);
+}
+
+label{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+#bill::before{
+    content: url('images/icon-dollar.svg');
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#percent-opt::placeholder{
+    text-align: center;
+}
+
+.btn-group{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(75px, 1fr));
+    gap: 20px;
+}
+
+
+.btn-group button{
+    background-color: var(--very-dark-cyan);
+    color: var(--White);
+}
+
+#selectTipLabel{
+    grid-column: span 3;
+}
+
+.result__wrapper{
+    background-color: var(--very-dark-cyan);
+    padding: 30px 40px;
+    border-radius: 15px;
+    display: grid;
+    row-gap: 15px;
+    align-items: flex-start;
+}
+
+.result_group{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
+    align-items: center;
+}
+
+.res_title{
+    color: var(--White);
+    line-height: 22px;
+    font-size: 16px;
+}
+
+.result_group .res_title span{
+    color: var(--Light-grayish-cyan);
+    font-size: 12px;  
+}
+
+.reset{
+    align-self: flex-end;
+    color: var(--very-dark-cyan);
+    text-transform: uppercase;
+    background-color: var(--Dark-grayish-cyan);
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.reset.active{
+    pointer-events: initial;
+    background-color: var(--strong-cyan);
+}
+
+.tip_result{
+    font-size: 45px;
+    color: var(--strong-cyan);
+    letter-spacing: normal;
+}
+
+#peopleNumber{
+    display: flex;
+    justify-content: space-between;
+}
+
+#peopleNumber span{
+    color: #b9826d;
+}
