@@ -17,7 +17,7 @@
         <div class="bill__wrapper">
           <div class="input-group">
             <label for="bill" id="lblBill">Bill</label>
-            <input type="text" class="billed" id="bill" placeholder="0" name="bills">
+            <input type="number" class="billed" id="bill" placeholder="0" name="bills">
           </div>
           <div class="input-group">
             <label for="percent-opt" id="selectTipLabel">Select Tip %</label>
@@ -27,12 +27,12 @@
               <button class="btn-percent-opt btn-percent" value="15">15%</button>
               <button class="btn-percent-opt btn-percent" value="25">25%</button>
               <button class="btn-percent-opt btn-percent" value="50">50%</button>
-              <input type="text" name="percent" id="percent-opt" placeholder="Custom" class="btn-percent-opt">
+              <input type="number" name="percent" id="percent-opt" placeholder="Custom" class="btn-percent-opt">
             </div>
           </div>
           <div class="input-group">
-            <label for="numberPeolpe" id="peopleNumber">Number of People</label>
-            <input type="text" name="people" id="numberPeolpe" placeholder="0">
+            <label for="numberPeolpe" id="peopleNumber">Number of People<span class="err-message">Can't be zero</span></label>
+            <input type="number" name="people" id="numberPeolpe" placeholder="0">
           </div>
         </div>
         <div class="result__wrapper">
@@ -51,7 +51,7 @@
   
   <footer class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="#">bienfrancis</a>.
   </footer>
   <script src="main.js"></script>
 </body>

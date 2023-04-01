@@ -5,18 +5,18 @@ let custom = document.querySelector('#percent-opt');
 let person = document.querySelector('#numberPeolpe');
 let reset = document.querySelector('.reset');
 let tipAmountPerPerson = document.querySelector('.tip__amount');
-let cantBeZero = document.querySelector('#peopleNumber');
+let cantBeZero = document.querySelector('.err-message');
 let totalBills, totalCustom, totalPerson, amountPerson, totalPerPerson ;
-let span = document.createElement('span');
-let spanText = document.createTextNode("Can't be zero");
 let btnPercent = document.querySelectorAll('.btn-percent');
+let allInput = document.querySelectorAll('input[type="number"]');
 let btnPercentVal;
 
-span.appendChild(spanText);
+// span.appendChild(spanText);
 
 const checkNumeric = (data) => {
-    if(isNaN(data.value) || data.value == 0){
+    if(Math.sign(data.value) <= -1 || data.value == 0){
         data.style  = "outline: 2px solid #b9826d";
+        data.value ='';
         reset.classList.remove('active');
     }else{
         data.style  = "outline: 2px solid hsl(172, 67%, 45%)";
@@ -24,16 +24,19 @@ const checkNumeric = (data) => {
     }
 }
 
-// set active to button percentage and get value
+// set active to button percentage and get value asddd
 for(let i = 0; i < btnPercent.length; i++){
     let activeBtn = btnPercent[i];
     activeBtn.addEventListener('click', () => {
         removeActive();  
         activeBtn.classList.add('active');
         totalCustom = activeBtn.value;
+        reset.classList.add('active');
+        calculateTotal();
     })
 }
 
+// remove class active
 const removeActive = () => {
     for(let i = 0; i < btnPercent.length; i++){
         btnPercent[i].classList.remove('active');
@@ -41,64 +44,66 @@ const removeActive = () => {
     }
 }
 
+// calculate tip
+const calculateTotal = () =>{
+    if(totalPerson <= 0 || totalPerson == null){
+        tipAmountPerPerson.innerText = '$ 0.00';
+        document.querySelector('.tip__total').innerText = '$ 0.00';
+    }else{
+        amountPerson = ((parseFloat(totalBills) * parseFloat(totalCustom) / 100)) / parseFloat(totalPerson);
+        totalPerPerson = (parseFloat(totalBills) / parseFloat(totalPerson)) + parseFloat(amountPerson);
+        tipAmountPerPerson.innerText = '$' + parseFloat(amountPerson).toFixed(2);
+        document.querySelector('.tip__total').innerText = '$' + parseFloat(totalPerPerson).toFixed(2);
+    }
+}
+
+// remove values and outline on each input
+const removeOutline = () => {
+    for(let a = 0; a < allInput.length; a++){
+        allInput[a].value = '';
+        allInput[a].style = "outline: none";
+    }
+
+    totalBills = '';
+    totalCustom = '';
+    totalPerson = '';
+
+}
+
 bill.addEventListener('input', () => {
     checkNumeric(bill);
     totalBills = bill.value;
-
+    calculateTotal();
 });
 
 custom.addEventListener('input', () =>{
     checkNumeric(custom);
     totalCustom = custom.value;
+    calculateTotal();
     removeActive();
 })
-
-const calculateTotal = () =>{
-    totalPerPerson = ((parseFloat(totalBills) / parseFloat(totalPerson)).toFixed(2)) + parseFloat(amountPerson).toFixed(2);
-    tipAmountPerPerson.innerText = '$' + amountPerson.toFixed(2);
-    cantBeZero.removeChild(span);
-}
-
-const calculatePerPerson = () => {
-    amountPerson = ((parseFloat(totalBills) * parseFloat(totalCustom) / 100).toFixed(2)) / parseFloat(totalPerson);
-    document.querySelector('.tip__total').innerText = '$' + totalPerPerson;
-}
 
 person.addEventListener('input', () =>{
     checkNumeric(person);
     totalPerson = person.value;
-    if(isNaN(totalPerson) || totalPerson == null){
-        tipAmountPerPerson.innerText = '$ 0.00';
-    }
-    else if(totalPerson == 0 || totalPerson == null){
-        cantBeZero.appendChild(span);
+    if(totalPerson <= 0 || totalPerson == null){
+        cantBeZero.classList.add('active');
         tipAmountPerPerson.innerText = '$ 0.00';
         document.querySelector('.tip__total').innerText = '$ 0.00';
     }
     else{
-        if(btnPercentVal){
-            // amountPerson = ((parseFloat(totalBills) * parseFloat(btnPercentVal) / 100).toFixed(2)) / parseFloat(totalPerson);
-            // tipAmountPerPerson.innerText = '$' + amountPerson.toFixed(2);
-            calculatePerPerson();
-            ca
-            
-        }else{
-            
-        }
-        
-        
-           
+        calculateTotal();
+        cantBeZero.classList.remove('active');
     }
 });
 
-
 reset.addEventListener('click', () => {
-    bill.value = '';
-    custom.value = '';
-    person.value = '';
+    removeOutline();
     removeActive();
     tipAmountPerPerson.innerText = '$ 0.00';
+    document.querySelector('.tip__total').innerText = '$ 0.00';
     reset.classList.remove('active');
+    cantBeZero.classList.remove('active');
 });
 
 
